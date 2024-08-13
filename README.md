@@ -29,3 +29,16 @@ This simple application works, but with very old-style monolithic codebase, so d
   - Using of transformer or response formatter is very helpful to easily modify any changes in the response format.
   - Using base classes like BaseModel is an example of DRY principly in coding or "Do not Repeat Yourself". It is specifically extended it in Models Classes.
   - Added basic testing for News create, create with comments, and delete. Just to emphasize importance of TDD.
+
+## 5. Execution
+
+  **Actual Returns:**
+    List: Run in root directory, php index.php
+    Create: Run in root directory, php create.php
+    Delete: Run in root directory, php delete.php
+    
+  **PHPUnit Testing (TDD)**
+    php vendor/bin/phpunit tests/NewsTest.php
+    php vendor/bin/phpunit tests/NewsTest.php --filter it_can_create_a_news
+    php vendor/bin/phpunit tests/NewsTest.php --filter it_can_create_a_news_comments
+    php vendor/bin/phpunit tests/NewsTest.php --filter it_can_delete_a_news_and_all_associated_comments
