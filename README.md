@@ -6,6 +6,7 @@
   - create an empty database named "phptest" on your MySQL server
   - import the dbdump.sql in the "phptest" database
   - put your MySQL server credentials in the src/Models config.ini
+  - RUN composer install in the root directory to download symfony dependencies
   - you can test the demo script in your shell: "php index.php"
 
 ## 2. Expectations
