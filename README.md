@@ -28,4 +28,4 @@ This simple application works, but with very old-style monolithic codebase, so d
   - Use of namespace is much easier to track classes.
   - Using of transformer or response formatter is very helpful to easily modify any changes in the response format.
   - Using base classes like BaseModel is an example of DRY principly in coding or "Do not Repeat Yourself". It is specifically extended it in Models Classes.
-    
+  - Added basic testing for News create, create with comments, and delete. Just to emphasize importance of TDD.
