@@ -36,4 +36,66 @@ class News extends BaseModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function findById($id)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM news WHERE id ='.$id.' LIMIT 1');
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param array $data
+     * @param $comments
+     * @return false|string
+     */
+    public function addNews(array $data, $comments = [])
+    {
+        $data = $this->buildData($data);
+        $values = array_values($data);
+        $sql = "INSERT INTO `news` (`title`, `body`, `created_at`) VALUES('" . implode("','", $values) . "')";
+        $this->pdo->prepare($sql)->execute();
+        $newsId = $this->pdo->lastInsertId();
+
+        if (!empty($comments)) {
+            (new Comment)->addComments($newsId, $comments);
+        }
+        return $newsId;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function buildData(array $data)
+    {
+        return [
+            'title' => $data['title'],
+            'body' => $data['body'] ?? 'Body',
+            'created_at' => date('Y-m-d')
+        ];
+    }
+
+    /**
+     * @param $id
+     * @return void
+     * deletes a news, and also linked comments
+     */
+    public function deleteNews($id)
+    {
+        $comment = new Comment;
+        $comments = $comment->getAll($id);
+
+        foreach ($comments as $item)
+        {
+            $comment->deleteComment($item['id']);
+        }
+
+        $sql = "DELETE FROM ". self::RESOURCE_KEY ." WHERE `id`=" . $id;
+        $this->pdo->prepare($sql)->execute();
+    }
 }

@@ -12,15 +12,17 @@ class NewsResourceCollection //extends Serializer
      */
     public function transform($data)
     {
-        foreach ($data as $model) {
-            $data[] = [
-                'id' => $model['id'],
-                'title' => $model['title'],
-                'body' => $model['body'],
-                'created_at' => $model['created_at'],
-                'comments' => (new News)->comments($model, new Comment)
-            ];
+        if ($data) {
+            foreach ($data as $model) {
+                $data[] = [
+                    'id' => $model['id'],
+                    'title' => $model['title'],
+                    'body' => $model['body'],
+                    'created_at' => $model['created_at'],
+                    'comments' => (new News)->comments($model, new Comment)
+                ];
+            }
+            return $data;
         }
-        return $data;
     }
 }

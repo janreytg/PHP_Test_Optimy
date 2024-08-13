@@ -35,5 +35,3 @@ class BaseModel
         }
     }
 }
-
-//(new BaseModel());
