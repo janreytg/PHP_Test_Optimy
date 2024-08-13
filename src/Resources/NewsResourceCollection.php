@@ -3,17 +3,13 @@ namespace App\Resources;
 
 use App\Models\Comment;
 use App\Models\News;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\YamlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class NewsResourceCollection //extends Serializer
 {
-//    public function __construct()
-//    {
-//        parent::__construct([new ObjectNormalizer()], [new YamlEncoder()]);
-//    }
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function transform($data)
     {
         foreach ($data as $model) {

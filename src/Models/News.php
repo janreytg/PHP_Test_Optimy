@@ -14,6 +14,9 @@ class News extends BaseModel
         'created_at'
     ];
 
+    /**
+     * @return array|false
+     */
     public function getAll()
     {
         $stmt = $this->pdo->prepare('SELECT * FROM ' . self::RESOURCE_KEY);
@@ -21,6 +24,11 @@ class News extends BaseModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param array $news
+     * @param Comment $comment
+     * @return array|false
+     */
     public function comments(array $news, Comment $comment)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM ' . $comment::RESOURCE_KEY . ' WHERE news_id = :news_id');

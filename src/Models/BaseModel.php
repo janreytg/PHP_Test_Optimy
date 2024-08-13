@@ -15,6 +15,9 @@ class BaseModel
         $this->pdo = $this->connect();
     }
 
+    /**
+     * @return PDO|void
+     */
     private function connect()
     {
         $host = $this->config['host'];
